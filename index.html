@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Color Generator</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-	<!-- <link async href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
-	<link async rel="stylesheet" type="text/css" href="css/parse.css"> -->
+	<link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+	<link async rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
+	<form name="pickColors" id="pick-colors">
+		<fieldset>
+			<legend>Random</legend>
+			Generates a random number of unspecified colors.<br>
+			<div class="input-group">
+				<input type="range" min="1" max="50" step="1" name="rndmRange" id="random-range" value="25">
+				<span id="random-value"></span>
+			</div>
+			<button name="generate" id="random-generate" alt="Click here to generate colors">Generate Random Colors</button>
+		</fieldset>
+	</form>
+	<section id="color-space">
 
+	</section>
 	<script async type="text/javascript" src="js/randomColor.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 	<!-- Remember to update this to https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.0/randomColor.min.js -->
 </body>
 </html>
