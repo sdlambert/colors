@@ -1,64 +1,98 @@
 (function(window, document, undefined) {
 	"use strict";
 
-	var rndmValue,
-	    rndmRange,
-	    rndmGenerate,
-	    colorSpace;
+	var rangeLbl,
+			rangeInput,
+			btnGenerate,
+			colorSpace,
+			hueInput,
+			luminosityInput,
+			radioBtns,
+			selected;
 
 	function init() {
-		rndmValue = document.getElementById('random-value');
-		rndmRange = document.getElementById('random-range');
-		rndmGenerate = document.getElementById('random-generate');
-		colorSpace = document.getElementById('color-space');
+		rangeLbl        = document.getElementById('range-label');
+		rangeInput      = document.getElementById('color-range');
+		btnGenerate     = document.getElementById('color-generate');
+		colorSpace      = document.getElementById('color-space');
+		hueInput        = document.getElementById('hue');
+		luminosityInput = document.getElementById('luminosity');
+		radioBtns       = document.getElementsByClassName('');
 
 		updateValue();
 
-		rndmRange.addEventListener("input", updateValue, false);
-		rndmGenerate.addEventListener("click", generateRandomColors, false);
-		colorSpace.addEventListener("mouseover", showColorValue, false);
+		rangeInput.addEventListener('input', updateValue, false);
+		btnGenerate.addEventListener('click', generateColors, false);
+		//options.addEventListener('change', updateOptions, false);
 	}
 
-	function updateValue () {
-		rndmValue.innerHTML = rndmRange.value;
+	function updateValue() {
+		rangeLbl.innerHTML = rangeInput.value;
 	}
 
-	function generateRandomColors (e) {
+	function generateColors (e) {
+
+		var colorArray = [],
+				colorObj,
+				i,
+				hue,
+				luminosity;
+
 		e.preventDefault();
 		removeChildren();
 
-		var colorArray = [],
-		    i;
+		if (hueInput.selectedIndex >= 1)
+			hue = hueInput.options[hueInput.selectedIndex].value;
 
-		for (i = 0; i < rndmRange.value; i++) {
-			colorArray[i] = randomColor();
+		if (luminosityInput.selectedIndex >= 1)
+			luminosity = luminosityInput.options[luminosityInput.selectedIndex].value;
+
+		// TODO: Figure out best way to configure parameters object
+
+		// For "pretty" random colors
+		// for (i = 0; i < rangeInput.value; i++) {
+		// 	colorArray[i] = randomColor();
+		// 	console.log(colorArray[i]);
+		// }
+
+		// For "true" random colors
+		// var colorArray = randomColor({
+		// 	count:      rangeInput.value,
+		// 	luminosity: "random",
+		// 	hue:        "random"
+		// });
+
+		//colorArray.forEach(createCircle);
+	}
+
+	function updateOptions (e) {
+		var i;
+
+		e.preventDefault();
+
+		for (i = 0; i < options.length; i++){
+			if (selected == options[i].id){
+				console.log(options[i].id);
+			}
 		}
-
-		colorArray.forEach(createCircle);
 	}
 
 	function createCircle (hexValue) {
-		var circle = document.createElement("div");
-		circle.classList.add("circle");
+		var circle = document.createElement('div');
+		circle.classList.add('circle');
 		circle.style.backgroundColor = hexValue;
+		circle.setAttribute('title', hexValue);
 		colorSpace.appendChild(circle);
+
 	}
 
-	function showColorValue (e) {
-		if (e.target && e.target.nodeName == "DIV") {
-			console.log(e.target.style.backgroundColor);
-		}
-	}
-
-	function removeChildren(e) {
-		if(e)
-			e.preventDefault();
+	function removeChildren() {
 		while (colorSpace.firstChild)
 			colorSpace.removeChild(colorSpace.firstChild);
 	}
 
 
 	// add event listener for page load
-	window.addEventListener("load", init, false);
+	window.addEventListener('load', init, false);
 
 })(window, document);

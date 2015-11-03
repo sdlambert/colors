@@ -9,14 +9,43 @@
 </head>
 <body>
 	<form name="pickColors" id="pick-colors">
+
 		<fieldset>
-			<legend>Random</legend>
-			Generates a random number of unspecified colors.<br>
-			<div class="input-group">
-				<input type="range" min="1" max="50" step="1" name="rndmRange" id="random-range" value="25">
-				<span id="random-value"></span>
+			<legend>Options</legend>
+			<p>Generate random colors using the options below.</p>
+			<div class="input-group full">
+				<div class="input-element half">
+				<label for="hue">Hue</label><br>
+				<select size="1" name="hue" id="hue">
+					<option>Default</option>
+					<option value="red">Red</option>
+					<option value="orange">Orange</option>
+					<option value="yellow">Yellow</option>
+					<option value="green">Green</option>
+					<option value="blue">Blue</option>
+					<option value="purple">Purple</option>
+					<option value="pink">Pink</option>
+					<option value="monochrome">Monochrome</option>
+					<option value="random">Random</option>
+				</select>
+				</div>
+				<div class="input-element half">
+				<label for="luminosity">Luminosity</label>
+				<select name="luminosity"id="luminosity">
+					<option>Default</option>
+					<option value="light">Light</option>
+					<option value="dark">Dark</option>
+					<option value="random">Random</option>
+				</select>
+				</div>
+				<br>
+				<label for="color-range">Quantity</label><br>
+				<div class="input-element full range">
+					<input type="range" min="1" max="50" step="1" name="rndmRange" id="color-range" value="25"><span id="range-label"></span><br>
+					<button name="generate" id="color-generate" alt="Click here to generate colors">Generate Random Colors</button>
+				</div>
 			</div>
-			<button name="generate" id="random-generate" alt="Click here to generate colors">Generate Random Colors</button>
+
 		</fieldset>
 	</form>
 	<section id="color-space">

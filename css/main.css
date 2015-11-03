@@ -66,42 +66,77 @@ body, button {
 	font-size: 16px;
 }
 
-form, fieldset {
+fieldset {
 	border: 1px solid #999;
 }
 
 form {
 	display: block;
 	margin: 10px auto;
+	padding: 5px;
 	width: 300px;
-	border-radius: 7px;
+}
+
+h1 {
+	font-size: 18px;
+	font-weight: bold;
+	margin: 1em 0 ;
 }
 
 fieldset {
-	margin: 10px;
-	padding: 10px;
+	margin: 5px;
+	padding: 5px;
 	border-radius: 5px;
 }
 
+legend {
+	margin: 5px;
+}
+
 .input-group {
-	width: 100%;
 	display: block;
-	margin: 10px 0;
+	margin: 5px 0;
+	font-size: 0;
+}
+
+.input-element {
+	display: block;
 	font-size: 0; /* percentage hack */
 }
 
-#random-value {
+.full {
+	width: 100%;
+}
+
+.half {
+	display: inline-block;
+	width: 50%;
+}
+
+label, span {
+	font-size: 15px;
+}
+
+.range {
+	display: block;
+	height: 20px;
+	vertical-align: middle;
+	margin: 5px 0;
+}
+
+#range-label {
 	display: inline-block;
 	width: 10%;
-	font-size: 15px;
-	text-align: center;
-	vertical-align: top;
+
+	height: 20px;
 }
+
 
 input[type=range] {
 	display: inline-block;
 	width: 90%;
 	margin: 0;
+
 }
 
 button {
@@ -115,5 +150,16 @@ button {
 	width: 40px;
 	height: 40px;
 	border-radius: 20px;
-	margin: 5px;
+	margin: 10px;
+}
+
+#color-space {
+	display: block;
+	width: 300px;
+	margin: 0 auto;
+
+}
+
+.hidden {
+	display: none;
 }
