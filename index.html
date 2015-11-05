@@ -8,10 +8,8 @@
 	<link async rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-	<form name="pickColors" id="pick-colors">
-
-		<fieldset>
-			<legend>Options</legend>
+	<section class="options">
+		<form name="pickColors" id="pick-colors">
 			<p>Generate random colors using the options below.</p>
 			<div class="input-group full">
 				<div class="input-element half">
@@ -30,7 +28,7 @@
 				</select>
 				</div>
 				<div class="input-element half">
-				<label for="luminosity">Luminosity</label>
+				<label for="luminosity">Luminosity</label><br>
 				<select name="luminosity"id="luminosity">
 					<option>Default</option>
 					<option value="light">Light</option>
@@ -45,9 +43,8 @@
 					<button name="generate" id="color-generate" alt="Click here to generate colors">Generate Random Colors</button>
 				</div>
 			</div>
-
-		</fieldset>
-	</form>
+		</form>
+	</section>
 	<section id="color-space">
 
 	</section>

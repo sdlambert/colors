@@ -33,7 +33,7 @@
 	function generateColors (e) {
 
 		var colorArray = [],
-				colorObj,
+				colorObj = {},
 				i,
 				hue,
 				luminosity;
@@ -41,11 +41,20 @@
 		e.preventDefault();
 		removeChildren();
 
-		if (hueInput.selectedIndex >= 1)
+		if (hueInput.selectedIndex >= 1) {
 			hue = hueInput.options[hueInput.selectedIndex].value;
+			colorObj.hue = hue;
+		}
 
-		if (luminosityInput.selectedIndex >= 1)
+		if (luminosityInput.selectedIndex >= 1) {
 			luminosity = luminosityInput.options[luminosityInput.selectedIndex].value;
+			colorObj.luminosity = luminosity;
+		}
+
+		colorObj.count = rangeInput.value;
+
+		colorArray = randomColor(colorObj);
+
 
 		// TODO: Figure out best way to configure parameters object
 
@@ -62,7 +71,7 @@
 		// 	hue:        "random"
 		// });
 
-		//colorArray.forEach(createCircle);
+		colorArray.forEach(createCircle);
 	}
 
 	function updateOptions (e) {

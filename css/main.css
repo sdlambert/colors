@@ -66,27 +66,31 @@ body, button {
 	font-size: 16px;
 }
 
-fieldset {
-	border: 1px solid #999;
+body {
+	background-color: white;
+}
+
+.options {
+	display: block;
+	background-color: #184449;
 }
 
 form {
+	color: #d9e3f2;
+	margin: 0 auto;
 	display: block;
-	margin: 10px auto;
 	padding: 5px;
-	width: 300px;
+	max-width: 300px;
+}
+
+p, label, select, input, button {
+	margin: 15px 0;
 }
 
 h1 {
 	font-size: 18px;
 	font-weight: bold;
 	margin: 1em 0 ;
-}
-
-fieldset {
-	margin: 5px;
-	padding: 5px;
-	border-radius: 5px;
 }
 
 legend {
@@ -119,7 +123,6 @@ label, span {
 
 .range {
 	display: block;
-	height: 20px;
 	vertical-align: middle;
 	margin: 5px 0;
 }
@@ -127,8 +130,6 @@ label, span {
 #range-label {
 	display: inline-block;
 	width: 10%;
-
-	height: 20px;
 }
 
 
@@ -136,12 +137,6 @@ input[type=range] {
 	display: inline-block;
 	width: 90%;
 	margin: 0;
-
-}
-
-button {
-	display: inline-block;
-	float: right;
 }
 
 .circle {
@@ -163,3 +158,5 @@ button {
 .hidden {
 	display: none;
 }
+
+/* TODO: Responsive design, make tablet/desktop views */
