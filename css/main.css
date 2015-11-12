@@ -75,26 +75,28 @@ body {
 	background-color: #184449;
 }
 
+h1 {
+	font-size: 18px;
+	font-weight: bold;
+	margin: 1em 0 ;
+	text-decoration: underline;
+	text-decoration-style: dotted;
+}
+
 form {
 	color: #d9e3f2;
-	margin: 0 auto;
 	display: block;
 	padding: 5px;
 	max-width: 300px;
+	margin: 0 auto;
 }
 
 p, label, select, input, button {
 	margin: 15px 0;
 }
 
-h1 {
-	font-size: 18px;
-	font-weight: bold;
-	margin: 1em 0 ;
-}
-
-legend {
-	margin: 5px;
+select {
+	width: 80%;
 }
 
 .input-group {
@@ -141,11 +143,23 @@ input[type=range] {
 
 .circle {
 	display: inline-block;
-	float: left;
 	width: 40px;
 	height: 40px;
 	border-radius: 20px;
 	margin: 10px;
+}
+
+.color-label {
+	font-size: 13px;
+	text-align: center;
+	font-family: monospace;
+	width: 100%;
+}
+
+.swatch {
+	width: 60px;
+	float: left;
+	margin-bottom: 10px;
 }
 
 #color-space {
@@ -160,3 +174,51 @@ input[type=range] {
 }
 
 /* TODO: Responsive design, make tablet/desktop views */
+
+@media screen and (min-width:800px){
+	body, html, .options {
+		height: 100%;
+	}
+
+	.options {
+		display: block;
+		float: left;
+	}
+
+	.circle {
+		width: 60px;
+		height: 60px;
+		border-radius: 30px;
+	}
+
+	.swatch {
+		width: 80px;
+		margin-bottom: 20px;
+	}
+
+	#color-space {
+		width: auto;
+		display: block;
+		padding: 0 auto;
+	}
+
+	.clearfix {
+		display: block;
+		clear: both;
+		margin: 0;
+	}
+}
+
+@media screen and (min-width:1280px){
+	.circle {
+		width: 80px;
+		height: 80px;
+		border-radius: 40px;
+	}
+
+	.swatch {
+		width: 100px;
+		margin: 0 15px 10px 15px;
+
+	}
+}

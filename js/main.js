@@ -2,13 +2,14 @@
 	"use strict";
 
 	var rangeLbl,
-			rangeInput,
-			btnGenerate,
-			colorSpace,
-			hueInput,
-			luminosityInput,
-			radioBtns,
-			selected;
+	    rangeInput,
+	    btnGenerate,
+	    colorSpace,
+	    hueInput,
+	    luminosityInput,
+	    radioBtns,
+	    selected,
+	    fragment;
 
 	function init() {
 		rangeLbl        = document.getElementById('range-label');
@@ -19,6 +20,8 @@
 		luminosityInput = document.getElementById('luminosity');
 		radioBtns       = document.getElementsByClassName('');
 
+		fragment = document.createDocumentFragment();
+
 		updateValue();
 
 		rangeInput.addEventListener('input', updateValue, false);
@@ -26,17 +29,13 @@
 		//options.addEventListener('change', updateOptions, false);
 	}
 
-	function updateValue() {
-		rangeLbl.innerHTML = rangeInput.value;
-	}
-
 	function generateColors (e) {
 
 		var colorArray = [],
-				colorObj = {},
-				i,
-				hue,
-				luminosity;
+		    colorObj = {},
+		    i,
+		    hue,
+		    luminosity;
 
 		e.preventDefault();
 		removeChildren();
@@ -55,23 +54,9 @@
 
 		colorArray = randomColor(colorObj);
 
+		colorArray.forEach(createSwatch);
 
-		// TODO: Figure out best way to configure parameters object
-
-		// For "pretty" random colors
-		// for (i = 0; i < rangeInput.value; i++) {
-		// 	colorArray[i] = randomColor();
-		// 	console.log(colorArray[i]);
-		// }
-
-		// For "true" random colors
-		// var colorArray = randomColor({
-		// 	count:      rangeInput.value,
-		// 	luminosity: "random",
-		// 	hue:        "random"
-		// });
-
-		colorArray.forEach(createCircle);
+		colorSpace.appendChild(fragment);
 	}
 
 	function updateOptions (e) {
@@ -86,13 +71,31 @@
 		}
 	}
 
-	function createCircle (hexValue) {
-		var circle = document.createElement('div');
+	function updateValue() {
+		rangeLbl.innerHTML = rangeInput.value;
+	}
+
+	function createSwatch (hexValue) {
+		var circle = createDiv(),
+		    colorLabel = createDiv(),
+		    colorSwatch = createDiv();
+
 		circle.classList.add('circle');
 		circle.style.backgroundColor = hexValue;
 		circle.setAttribute('title', hexValue);
-		colorSpace.appendChild(circle);
 
+		colorLabel.classList.add('color-label');
+		colorLabel.appendChild(document.createTextNode(hexValue));
+
+		colorSwatch.classList.add('swatch');
+		colorSwatch.appendChild(circle);
+		colorSwatch.appendChild(colorLabel);
+
+		fragment.appendChild(colorSwatch);
+	}
+
+	function createDiv () {
+		return document.createElement('div');
 	}
 
 	function removeChildren() {
