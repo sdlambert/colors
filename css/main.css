@@ -70,9 +70,8 @@ body {
 	background-color: white;
 }
 
-.options {
+#options{
 	display: block;
-	background-color: #184449;
 }
 
 h1 {
@@ -195,12 +194,12 @@ input[type=range] {
 }
 
 @media screen and (min-width:800px){
-	body, html, .options, #color-space {
+	body, html, #options, #color-space {
 		height: 100%;
 		overflow-y: auto;
 	}
 
-	.options {
+	#options{
 		display: block;
 		float: left;
 	}

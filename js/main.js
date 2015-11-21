@@ -7,8 +7,7 @@
 	    colorSpace,
 	    hueInput,
 	    luminosityInput,
-	    radioBtns,
-	    selected,
+	    optionSection,
 	    fragment;
 
 	function init() {
@@ -18,21 +17,25 @@
 		colorSpace      = document.getElementById('color-space');
 		hueInput        = document.getElementById('hue');
 		luminosityInput = document.getElementById('luminosity');
-		radioBtns       = document.getElementsByClassName('');
+		optionSection   = document.getElementById('options');
 
 		fragment = document.createDocumentFragment();
 
-		updateValue();
+		updateRangeValue();
 
-		rangeInput.addEventListener('input', updateValue, false);
+		rangeInput.addEventListener('input', updateRangeValue, false);
 		btnGenerate.addEventListener('click', generateColors, false);
-		//options.addEventListener('change', updateOptions, false);
+
+		optionSection.style.backgroundColor = randomColor({
+				hue: getBackgroundColor(),
+				luminosity: "dark"
+			});
 	}
 
 	function generateColors (e) {
 
 		var colorArray = [],
-		    colorObj = {},
+		    colorObj   = {},
 		    i,
 		    hue,
 		    luminosity;
@@ -53,32 +56,19 @@
 		colorObj.count = rangeInput.value;
 
 		colorArray = randomColor(colorObj);
-
 		colorArray.forEach(createSwatch);
 
 		colorSpace.appendChild(fragment);
 	}
 
-	function updateOptions (e) {
-		var i;
-
-		e.preventDefault();
-
-		for (i = 0; i < options.length; i++){
-			if (selected == options[i].id){
-				console.log(options[i].id);
-			}
-		}
-	}
-
-	function updateValue() {
+	function updateRangeValue() {
 		rangeLbl.innerHTML = rangeInput.value;
 	}
 
 	function createSwatch (hexValue) {
-		var circle = createDiv(),
-		    colorLabel = createDiv(),
-		    colorSwatch = createDiv();
+		var circle      = document.createElement('div'),
+		    colorLabel  = document.createElement('div'),
+		    colorSwatch = document.createElement('div');
 
 		circle.classList.add('circle');
 		circle.style.backgroundColor = hexValue;
@@ -94,16 +84,15 @@
 		fragment.appendChild(colorSwatch);
 	}
 
-	function createDiv () {
-		return document.createElement('div');
-	}
-
 	function removeChildren() {
 		while (colorSpace.firstChild)
 			colorSpace.removeChild(colorSpace.firstChild);
 	}
 
-
+	function getBackgroundColor () {
+		var hues = ["red", "orange", "green", "blue", "purple", "monochrome"];
+		return hues[Math.floor(Math.random() * 6)];
+	}
 	// add event listener for page load
 	window.addEventListener('load', init, false);
 
