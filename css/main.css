@@ -166,25 +166,15 @@ input[type=range] {
 	display: block;
 	width: 300px;
 	margin: 0 auto;
-
 }
 
 .hidden {
 	display: none;
 }
 
-/* TODO: Responsive design, make tablet/desktop views */
+/* Tablet and Desktop Views */
 
-@media screen and (min-width:800px){
-	body, html, .options {
-		height: 100%;
-	}
-
-	.options {
-		display: block;
-		float: left;
-	}
-
+@media screen and (min-width:600px) {
 	.circle {
 		width: 60px;
 		height: 60px;
@@ -197,15 +187,32 @@ input[type=range] {
 	}
 
 	#color-space {
-		width: auto;
+		width: 500px;
 		display: block;
-		padding: 0 auto;
+		padding: 0 10px;
+
+	}
+}
+
+@media screen and (min-width:800px){
+	body, html, .options, #color-space {
+		height: 100%;
+		overflow-y: auto;
+	}
+
+	.options {
+		display: block;
+		float: left;
 	}
 
 	.clearfix {
 		display: block;
 		clear: both;
 		margin: 0;
+	}
+
+	#color-space {
+		width: auto;
 	}
 }
 
