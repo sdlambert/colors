@@ -11,8 +11,12 @@
 	<section id="options">
 
 		<form name="pickColors" id="pick-colors">
-			<h1>Color Generator</h1>
-			<p>Generate random colors using the options below.</p>
+			<div class="intro full">
+				<h1>Color Generator</h1>
+				<p>Generate random colors using the options below.</p>
+				<button id="background" type="button" alt="Click here to change the background color of the options panel">Change Background</button>
+			</div>
+
 			<div class="input-group full">
 
 				<div class="input-element half">
@@ -45,7 +49,7 @@
 				<div class="input-element full range">
 					<label for="color-range">Quantity</label><br>
 					<input id="color-range" name="rndmRange" type="range" min="1" max="50" step="1"  value="25"><span id="range-label"></span><br>
-					<button id="color-generate" name="generate" alt="Click here to generate colors">Generate Random Colors</button>
+					<button id="color-generate" name="generate" type="button" alt="Click here to generate colors">Generate Random Colors</button>
 				</div>
 			</div>
 		</form>

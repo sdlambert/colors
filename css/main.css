@@ -61,17 +61,15 @@ html {
 
 /* Main CSS */
 
-body, button {
+body {
 	font-family: 'Cabin', sans-serif;
 	font-size: 16px;
-}
-
-body {
 	background-color: white;
 }
 
 #options{
 	display: block;
+	background-color: #184449;
 }
 
 h1 {
@@ -90,8 +88,8 @@ form {
 	margin: 0 auto;
 }
 
-p, label, select, input, button {
-	margin: 15px 0;
+select, input, button {
+	margin: 1.5em 0;
 }
 
 select {
@@ -101,12 +99,17 @@ select {
 .input-group {
 	display: block;
 	margin: 5px 0;
+	padding-top: 10px;
 	font-size: 0;
 }
 
 .input-element {
 	display: block;
 	font-size: 0; /* percentage hack */
+}
+
+.intro, .input-group {
+	border-bottom: 1px solid currentColor;
 }
 
 .full {

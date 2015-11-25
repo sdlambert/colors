@@ -4,6 +4,7 @@
 	var rangeLbl,
 	    rangeInput,
 	    btnGenerate,
+	    btnChangeBackground,
 	    colorSpace,
 	    hueInput,
 	    luminosityInput,
@@ -11,13 +12,14 @@
 	    fragment;
 
 	function init() {
-		rangeLbl        = document.getElementById('range-label');
-		rangeInput      = document.getElementById('color-range');
-		btnGenerate     = document.getElementById('color-generate');
-		colorSpace      = document.getElementById('color-space');
-		hueInput        = document.getElementById('hue');
-		luminosityInput = document.getElementById('luminosity');
-		optionSection   = document.getElementById('options');
+		rangeLbl            = document.getElementById('range-label');
+		rangeInput          = document.getElementById('color-range');
+		btnGenerate         = document.getElementById('color-generate');
+		colorSpace          = document.getElementById('color-space');
+		hueInput            = document.getElementById('hue');
+		luminosityInput     = document.getElementById('luminosity');
+		optionSection       = document.getElementById('options');
+		btnChangeBackground = document.getElementById('background');
 
 		fragment = document.createDocumentFragment();
 
@@ -25,11 +27,7 @@
 
 		rangeInput.addEventListener('input', updateRangeValue, false);
 		btnGenerate.addEventListener('click', generateColors, false);
-
-		optionSection.style.backgroundColor = randomColor({
-				hue: getBackgroundColor(),
-				luminosity: "dark"
-			});
+		btnChangeBackground.addEventListener('click', updateBackground, false);
 	}
 
 	function generateColors (e) {
@@ -93,6 +91,14 @@
 		var hues = ["red", "orange", "green", "blue", "purple", "monochrome"];
 		return hues[Math.floor(Math.random() * 6)];
 	}
+
+	function updateBackground () {
+		optionSection.style.backgroundColor = randomColor({
+				hue: getBackgroundColor(),
+				luminosity: "dark"
+			});
+	}
+
 	// add event listener for page load
 	window.addEventListener('load', init, false);
 
