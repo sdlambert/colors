@@ -73,11 +73,17 @@ body {
 }
 
 h1 {
+	margin: 1em 0 ;
+}
+
+h2 {
+	margin-bottom: 1em;
+}
+
+h1, h2 {
 	font-size: 18px;
 	font-weight: bold;
-	margin: 1em 0 ;
-	text-decoration: underline;
-	text-decoration-style: dotted;
+
 }
 
 form {
@@ -108,7 +114,7 @@ select {
 	font-size: 0; /* percentage hack */
 }
 
-.intro, .input-group {
+.intro {
 	border-bottom: 1px solid currentColor;
 }
 
