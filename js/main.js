@@ -1,45 +1,41 @@
 (function(window, document, undefined) {
 	"use strict";
 
-	var rangeLbl,
-	    rangeInput,
-	    btnGenerate,
+	var btnGenerate,
 	    btnChangeBackground,
-	    colorSpace,
+	    rangeInput,
 	    hueInput,
 	    luminosityInput,
-	    optionSection,
-	    fragment;
+	    masterSwatch;
 
 	function init() {
-		rangeLbl            = document.getElementById('range-label');
-		rangeInput          = document.getElementById('color-range');
+
 		btnGenerate         = document.getElementById('color-generate');
-		colorSpace          = document.getElementById('color-space');
+		btnChangeBackground = document.getElementById('background');
+		rangeInput          = document.getElementById('color-range');
 		hueInput            = document.getElementById('hue');
 		luminosityInput     = document.getElementById('luminosity');
-		optionSection       = document.getElementById('options');
-		btnChangeBackground = document.getElementById('background');
-
-		fragment = document.createDocumentFragment();
 
 		updateRangeValue();
 
 		rangeInput.addEventListener('input', updateRangeValue, false);
 		btnGenerate.addEventListener('click', generateColors, false);
 		btnChangeBackground.addEventListener('click', updateBackground, false);
+
+		masterSwatch = createSwatch();
 	}
 
 	function generateColors (e) {
 
-		var colorArray = [],
+		var fragment   = document.createDocumentFragment(),
+		    colorSpace = document.getElementById('color-space'),
+		    colorArray = [],
 		    colorObj   = {},
-		    i,
 		    hue,
 		    luminosity;
 
 		e.preventDefault();
-		removeChildren();
+		removeChildren(colorSpace);
 
 		if (hueInput.selectedIndex >= 1) {
 			hue = hueInput.options[hueInput.selectedIndex].value;
@@ -54,37 +50,45 @@
 		colorObj.count = rangeInput.value;
 
 		colorArray = randomColor(colorObj);
-		colorArray.forEach(createSwatch);
+		fillSwatches(colorArray, fragment); // Send array and doc fragment
 
 		colorSpace.appendChild(fragment);
 	}
 
 	function updateRangeValue() {
+		var rangeLbl = document.getElementById('range-label');
 		rangeLbl.innerHTML = rangeInput.value;
 	}
 
-	function createSwatch (hexValue) {
-		var circle      = document.createElement('div'),
-		    colorLabel  = document.createElement('div'),
-		    colorSwatch = document.createElement('div');
+	function createSwatch () {
+		var circle = document.createElement('div'),
+		    label  = document.createElement('div'),
+		    swatch = document.createElement('div');
 
 		circle.classList.add('circle');
-		circle.style.backgroundColor = hexValue;
-		circle.setAttribute('title', hexValue);
+		label.classList.add('color-label');
+		swatch.classList.add('swatch');
+		swatch.appendChild(circle);
+		swatch.appendChild(label);
 
-		colorLabel.classList.add('color-label');
-		colorLabel.appendChild(document.createTextNode(hexValue));
-
-		colorSwatch.classList.add('swatch');
-		colorSwatch.appendChild(circle);
-		colorSwatch.appendChild(colorLabel);
-
-		fragment.appendChild(colorSwatch);
+		return swatch;
 	}
 
-	function removeChildren() {
-		while (colorSpace.firstChild)
-			colorSpace.removeChild(colorSpace.firstChild);
+	function fillSwatches (arr, parent) {
+ 		arr.forEach(function (hexValue) {
+ 			var swatch = masterSwatch.cloneNode(true);
+ 			// first child = circle, second child = label
+ 			swatch.childNodes[0].style.backgroundColor = hexValue;
+ 			swatch.childNodes[0].setAttribute('title', hexValue);
+ 			swatch.childNodes[1].appendChild(document.createTextNode(hexValue));
+
+ 			parent.appendChild(swatch);
+ 		});
+	}
+
+	function removeChildren(parent) {
+		while (parent.firstChild)
+			parent.removeChild(parent.firstChild);
 	}
 
 	function getBackgroundColor () {
@@ -93,6 +97,8 @@
 	}
 
 	function updateBackground () {
+		var optionSection = document.getElementById('options');
+
 		optionSection.style.backgroundColor = randomColor({
 				hue: getBackgroundColor(),
 				luminosity: "dark"
