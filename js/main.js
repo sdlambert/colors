@@ -1,13 +1,24 @@
+/*
+ * main.js
+ * Immediately invoked function expression to contain functions and variables
+ *
+ */
 (function(window, document, undefined) {
 	"use strict";
 
-	var btnGenerate,
-	    btnChangeBackground,
-	    rangeInput,
-	    hueInput,
-	    luminosityInput,
-	    masterSwatch;
+	// "Global" variables
 
+	var btnGenerate,         // button to generate colors
+	    btnChangeBackground, // button to change the background of the options
+	    rangeInput,          // how many different colors to generate
+	    hueInput,            // hue inputs (red, blue, etc.)
+	    luminosityInput,     // luminosity inputs (light, dark, etc.)
+	    masterSwatch;        // master template containing DOM nodes for swatches
+
+	/*
+	 * init() is called on load and grabs all of our primary inputs and
+	 * initializes our master swatch
+	 */
 	function init() {
 
 		btnGenerate         = document.getElementById('color-generate');
@@ -18,13 +29,20 @@
 
 		updateRangeValue();
 
-		rangeInput.addEventListener('input', updateRangeValue, false);
 		btnGenerate.addEventListener('click', generateColors, false);
 		btnChangeBackground.addEventListener('click', updateBackground, false);
+		rangeInput.addEventListener('input', updateRangeValue, false);
 
 		masterSwatch = createSwatch();
 	}
 
+	/*
+	 * generateColors() parses our input and generates the specified number of
+	 * color swatches given the inputs selected by the user. This is where we
+	 * make our calls to the color.js library
+	 *
+	 * @param  {Event} e - the click event from the button
+	 */
 	function generateColors (e) {
 
 		var fragment   = document.createDocumentFragment(),
@@ -37,6 +55,7 @@
 		e.preventDefault();
 		removeChildren(colorSpace);
 
+		// parse hue and luminosity
 		if (hueInput.selectedIndex >= 1) {
 			hue = hueInput.options[hueInput.selectedIndex].value;
 			colorObj.hue = hue;
@@ -55,11 +74,20 @@
 		colorSpace.appendChild(fragment);
 	}
 
+	/**
+	 * updateRangeValue() is called when the user moves the range input
+	 */
 	function updateRangeValue() {
 		var rangeLbl = document.getElementById('range-label');
 		rangeLbl.innerHTML = rangeInput.value;
 	}
 
+	/*
+	 * createSwatch() creates the master color swatch template to be used for
+	 * all of the generated colors, returning the parent Node
+	 *
+	 * @return {Node} swatch
+	 */
 	function createSwatch () {
 		var circle = document.createElement('div'),
 		    label  = document.createElement('div'),
@@ -74,6 +102,13 @@
 		return swatch;
 	}
 
+	/*
+	 * fillswatches() takes an array of hex values and creates a swatch for each
+	 * using the master swatch template
+	 *
+	 * @param  {Array} arr      - the array of hex values
+	 * @param  {Element} parent - the parent element that will hold all children
+	 */
 	function fillSwatches (arr, parent) {
  		arr.forEach(function (hexValue) {
  			var swatch = masterSwatch.cloneNode(true);
@@ -86,21 +121,33 @@
  		});
 	}
 
+	/*
+	 * removeChildren() takes a parent Node and removes all of its children
+	 *
+	 * @param  {Node} parent - the parent Node
+	 */
 	function removeChildren(parent) {
 		while (parent.firstChild)
 			parent.removeChild(parent.firstChild);
 	}
 
-	function getBackgroundColor () {
+	/*
+	 * getDarkHue() returns a random color from various dark hues
+	 *
+	 * @return {String} - the hue string
+	 */
+	function getDarkHue () {
 		var hues = ["red", "orange", "green", "blue", "purple", "monochrome"];
 		return hues[Math.floor(Math.random() * 6)];
 	}
-
+	/*
+	 * updateBackground() changes the color of the options background
+	 */
 	function updateBackground () {
 		var optionSection = document.getElementById('options');
 
 		optionSection.style.backgroundColor = randomColor({
-				hue: getBackgroundColor(),
+				hue: getDarkHue(),
 				luminosity: "dark"
 			});
 	}
