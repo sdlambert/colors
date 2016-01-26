@@ -106,8 +106,8 @@
 	 * fillswatches() takes an array of hex values and creates a swatch for each
 	 * using the master swatch template
 	 *
-	 * @param  {Array} arr      - the array of hex values
-	 * @param  {Element} parent - the parent element that will hold all children
+	 * @param  {Array} arr               - the array of hex values
+	 * @param  {DocumentFragment} parent - fragment to act as our parent Node
 	 */
 	function fillSwatches (arr, parent) {
  		arr.forEach(function (hexValue) {
@@ -152,7 +152,6 @@
 			});
 	}
 
-	// add event listener for page load
 	window.addEventListener('load', init, false);
 
 })(window, document);
