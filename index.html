@@ -14,6 +14,7 @@
 			<div class="intro full">
 				<h1>Color Generator</h1>
 				<p>Generate random colors using the options below.</p>
+				<p><em>Powered by <a href="https://github.com/davidmerfield/randomColor">randomColor.js</a> by David Merfield.</em></p>
 				<button id="background" type="button" alt="Click here to change the background color of the options panel">Change Background</button>
 			</div>
 
@@ -40,6 +41,7 @@
 					<label for="luminosity">Luminosity</label><br>
 					<select id="luminosity" name="luminosity">
 						<option>Default</option>
+						<option value="bright">Bright</option>
 						<option value="light">Light</option>
 						<option value="dark">Dark</option>
 						<option value="random">Random</option>
@@ -49,8 +51,7 @@
 
 				<div class="input-element full range">
 					<label for="color-range">Quantity</label><br>
-					<input id="color-range" name="rndmRange" type="range" min="1" max="50" step="1"  value="25"><span id="range-label"></span><br>
-					<button id="color-generate" name="generate" type="button" alt="Click here to generate colors">Generate Random Colors</button>
+					<input id="color-range" name="rndmRange" type="range" min="1" max="128" step="1"  value="25"><span id="range-label"></span><br>
 				</div>
 			</div>
 		</form>

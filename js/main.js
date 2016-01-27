@@ -8,12 +8,12 @@
 
 	// "Global" variables
 
-	var btnGenerate,         // button to generate colors
-	    btnChangeBackground, // button to change the background of the options
+	var btnChangeBackground, // button to change the background of the options
 	    rangeInput,          // how many different colors to generate
 	    hueInput,            // hue inputs (red, blue, etc.)
 	    luminosityInput,     // luminosity inputs (light, dark, etc.)
-	    masterSwatch;        // master template containing DOM nodes for swatches
+	    masterSwatch,        // master template containing DOM nodes for swatches
+	    colorArray = [];     // color array
 
 	/*
 	 * init() is called on load and grabs all of our primary inputs and
@@ -21,7 +21,6 @@
 	 */
 	function init() {
 
-		btnGenerate         = document.getElementById('color-generate');
 		btnChangeBackground = document.getElementById('background');
 		rangeInput          = document.getElementById('color-range');
 		hueInput            = document.getElementById('hue');
@@ -29,9 +28,11 @@
 
 		updateRangeValue();
 
-		btnGenerate.addEventListener('click', generateColors, false);
 		btnChangeBackground.addEventListener('click', updateBackground, false);
-		rangeInput.addEventListener('input', updateRangeValue, false);
+		rangeInput.addEventListener('input',updateRangeValue, false);
+		rangeInput.addEventListener('change', generateColors, false);
+		hueInput.addEventListener('change', generateColors, false);
+		luminosityInput.addEventListener('change', generateColors, false);
 
 		masterSwatch = createSwatch();
 	}
@@ -47,13 +48,15 @@
 
 		var fragment   = document.createDocumentFragment(),
 		    colorSpace = document.getElementById('color-space'),
-		    colorArray = [],
+		    rangeLbl   = document.getElementById('range-label'),
 		    colorObj   = {},
 		    hue,
 		    luminosity;
 
 		e.preventDefault();
 		removeChildren(colorSpace);
+
+		rangeLbl.innerHTML = rangeInput.value;
 
 		// parse hue and luminosity
 		if (hueInput.selectedIndex >= 1) {
@@ -153,5 +156,6 @@
 	}
 
 	window.addEventListener('load', init, false);
+	window.addEventListener('load', generateColors, false);
 
 })(window, document);
