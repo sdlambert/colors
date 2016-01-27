@@ -8,8 +8,7 @@
 
 	// "Global" variables
 
-	var btnChangeBackground, // button to change the background of the options
-	    rangeInput,          // how many different colors to generate
+	var rangeInput,          // how many different colors to generate
 	    hueInput,            // hue inputs (red, blue, etc.)
 	    luminosityInput,     // luminosity inputs (light, dark, etc.)
 	    masterSwatch,        // master template containing DOM nodes for swatches
@@ -21,14 +20,12 @@
 	 */
 	function init() {
 
-		btnChangeBackground = document.getElementById('background');
 		rangeInput          = document.getElementById('color-range');
 		hueInput            = document.getElementById('hue');
 		luminosityInput     = document.getElementById('luminosity');
 
 		updateRangeValue();
 
-		btnChangeBackground.addEventListener('click', updateBackground, false);
 		rangeInput.addEventListener('input',updateRangeValue, false);
 		rangeInput.addEventListener('change', generateColors, false);
 		hueInput.addEventListener('change', generateColors, false);
@@ -132,27 +129,6 @@
 	function removeChildren(parent) {
 		while (parent.firstChild)
 			parent.removeChild(parent.firstChild);
-	}
-
-	/*
-	 * getDarkHue() returns a random color from various dark hues
-	 *
-	 * @return {String} - the hue string
-	 */
-	function getDarkHue () {
-		var hues = ["red", "orange", "green", "blue", "purple", "monochrome"];
-		return hues[Math.floor(Math.random() * 6)];
-	}
-	/*
-	 * updateBackground() changes the color of the options background
-	 */
-	function updateBackground () {
-		var optionSection = document.getElementById('options');
-
-		optionSection.style.backgroundColor = randomColor({
-				hue: getDarkHue(),
-				luminosity: "dark"
-			});
 	}
 
 	window.addEventListener('load', init, false);
