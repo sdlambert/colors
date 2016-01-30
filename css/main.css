@@ -177,7 +177,7 @@ label, span {
 input[type=range] {
 	display: inline-block;
 	width: 90%;
-	margin: 0;
+	margin: .5em 0;
 }
 
 .circle {
